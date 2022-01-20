@@ -1,12 +1,13 @@
 # Run
 
 # Setup
-- npx create-react-app admin-react --template typescript
+- `npx create-react-app admin-react --template typescript`
 - bootstrap
   - *css link* from *get started*
   - dashboard example: 
     - copy *html* to App.tsx
     - copy *css* to App.css
+- `npm i react-router-dom @types/react-router-dom`
 
 
 
