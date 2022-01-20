@@ -1,3 +1,28 @@
+# Run
+
+# Setup
+- npx create-react-app admin-react --template typescript
+- bootstrap
+  - *css link* from *get started*
+  - dashboard example: 
+    - copy *html* to App.tsx
+    - copy *css* to App.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
