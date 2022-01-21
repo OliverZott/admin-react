@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import {NavLink} from 'react-router-dom';
+import {Link} from "react-router-dom";
 
 // Second variant of creating component (hooks-method)
 const Menu = () => {

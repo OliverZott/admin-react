@@ -6,28 +6,27 @@ import Dashboard from "./pages/Dashboard";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Users from "./pages/Users";
 
-
 function App() {
     return (
         <div className="App">
-            <Nav/>
+            <BrowserRouter>
+                <Nav/>
 
-            <div className="container-fluid">
-                <div className="row">
-                    <Menu/>
+                <div className="container-fluid">
+                    <div className="row">
+                        <Menu/>
 
-                    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-                        <BrowserRouter>
                             <Routes>
                                 <Route path="/" element={<Dashboard/>}/>
                                 <Route path="/users" element={<Users/>}/>
                             </Routes>
-                        </BrowserRouter>
 
-                    </main>
+                        </main>
+                    </div>
                 </div>
-            </div>
+            </BrowserRouter>
         </div>
     );
 }

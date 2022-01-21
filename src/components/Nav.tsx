@@ -1,6 +1,5 @@
 import React from "react";
 
-
 // First variant of creating component (class-method)
 class Nav extends React.Component {
     render() {
