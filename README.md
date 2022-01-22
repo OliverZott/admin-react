@@ -7,9 +7,17 @@
   - dashboard example: 
     - copy *html* to App.tsx
     - copy *css* to App.css
+
+
+# Steps
+## Router in application
 - `npm i react-router-dom @types/react-router-dom`
 
 
+## API requests
+### axios
+- `npm i axios @types/axios`
+- use `axios.post().then()`
 
 
 
