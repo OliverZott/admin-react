@@ -1,30 +1,44 @@
 import {Component, SyntheticEvent} from "react";
 import "../Login.css";
 import axios from "axios";
+import {Navigate} from "react-router-dom";
 
 class Register extends Component {
     first_name: string | undefined;
     last_name: string | undefined;
-    email: string | undefined;
-    password: string | undefined;
-    password_confirm: string | undefined;
+    email: string = '';
+    password: string = '';
+    password_confirm: string = '';
+
+    state = {
+        redirect: false
+    }
 
     // preventDefault to suppress default behavior on event
-    submit = (e: SyntheticEvent) => {
+    submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        axios.post("http://localhost:8000/api/register", {
+        const response = await axios.post("http://localhost:8000/api/register", {
             first_name: this.first_name,
             last_name: this.last_name,
             email: this.email,
             password: this.password,
             password_confirm: this.password_confirm
-        }).then(r => {
-            console.log(r);
-        })
+        });
+
+        this.setState({
+            redirect: true
+        });
+
+        console.log(response);
     };
 
     render() {
+
+        if (this.state.redirect) {
+            return (<Navigate to="/login"/>)
+        }
+
         return (
             <main className="form-signin">
                 <form onSubmit={this.submit}>
