@@ -1,15 +1,38 @@
-import React, {useState} from 'react';
+import axios from 'axios';
+import React, { SyntheticEvent, useState } from 'react';
 
 const Login = () => {
-    const [count, setCount] = useState(0);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const submit = async (e: SyntheticEvent) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post("http://localhost:8000/api/login", {
+                email,
+                password
+            }, { withCredentials: true });
+
+            console.log(response.data)
+        } catch (e) {
+            console.log(e)
+        }
+    };
+
 
     return (
-        <div className="container">
-            <h1>Login</h1>
-            Count = {count}
-            <br/>
-            <input type={"number"} onChange={e => setCount(parseInt(e.target.value))}/>
-        </div>
+        <main>
+            <form onSubmit={submit} className="form-signin">
+                <h1 className='h3 mb-3 fw-normal'>Sign in</h1>
+                <input type="email" className='form-control' placeholder='Email' required
+                    onChange={e => setEmail(e.target.value)} />
+                <input type="password" className='form-control' required placeholder='Password'
+                    onChange={e => setPassword(e.target.value)} />
+
+                <button className='w-100 btn bnt-lg btn-primary' type='submit' >Submit</button>
+            </form>
+        </main>
     )
 }
 
