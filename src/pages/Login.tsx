@@ -1,25 +1,32 @@
 import axios from 'axios';
 import React, { SyntheticEvent, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:8000/api/login", {
+            const response = await axios.post("login", {
                 email,
                 password
             }, { withCredentials: true });
 
-            console.log(response.data)
+            console.log(response.data);
+            setRedirect(true);
         } catch (e) {
             console.log(e)
         }
     };
 
+
+    if (redirect) {
+        return <Navigate to={'/'} />;
+    }
 
     return (
         <main>
