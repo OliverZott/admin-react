@@ -1,26 +1,45 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import Menu from "./Menu";
 import Nav from "./Nav";
 
 
-class Wrapper extends React.Component {
-    render() {
-        return (
-            <div>
-                <Nav/>
+const Wrapper = (props: any) => {
+    const [redirect, setRedirect] = useState(false);
 
-                <div className="container-fluid">
-                    <div className="row">
-                        <Menu/>
+    useEffect(() => {
+        (
+            async () => {
+                try {
+                    const { data } = await axios.get("user", { withCredentials: true });        // credentials are set global as well
+                } catch (e) {
+                    console.log(e);
+                    setRedirect(true);
+                }
+            }
+        )();
+    }, [])
 
-                        <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                            {this.props.children}
-                        </main>
-                    </div>
+    if (redirect) {
+        return <Navigate to={"/login"}></Navigate>
+    }
+
+    return (
+        <div>
+            <Nav />
+
+            <div className="container-fluid">
+                <div className="row">
+                    <Menu />
+
+                    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        {props.children}
+                    </main>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default Wrapper;

@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
     const [user, setUser] = useState({
         user: '',
     });
+
 
     useEffect(() => {
         /**
@@ -19,10 +21,13 @@ const Nav = () => {
                 console.log("WOOOORKED =)")
             }
         )();
-
     }, [])
 
 
+    const logout = async () => {
+        const data = await axios.post('logout', {});
+        console.log(data);
+    }
 
 
     return (
@@ -30,28 +35,11 @@ const Nav = () => {
             <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
 
             <ul className="my-2 my-md-0 mr-md-3">
-                <a className="p-2 text-white" href="#">{user?.user}</a>
-                <a className="p-2 text-white" href="#">Sign Out</a>
-
+                <Link to={"/profile"} className="p-2 text-white" >{user?.user}</Link>
+                <Link to={"/login"} className="p-2 text-white" onClick={logout}>Sign Out</Link>
             </ul>
-
-            {/* <button className="navbar-toggler position-absolute d-md-none collapsed" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <input className="form-control form-control-dark w-100" type="text" placeholder="Search"
-                aria-label="Search" />
-            <div className="navbar-nav">
-                <div className="nav-item text-nowrap">
-                    <a className="nav-link px-3">Sign out</a>
-                </div>
-            </div> */}
-
         </nav>
     )
-
 }
 
 export default Nav;
