@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // Second variant of creating component (hooks-method)
 const Menu = () => {
@@ -8,14 +8,14 @@ const Menu = () => {
             <div className="position-sticky pt-3">
                 <ul className="nav flex-column">
                     <li className="nav-item">
-                        <Link to="/" className="nav-link active">
+                        <NavLink to="/" className="nav-link active">
                             Dashboard
-                        </Link>
+                        </NavLink>
                     </li>
                     <li className="nav-item">
-                        <Link to="/users" className="nav-link active">
+                        <NavLink to="/users" className="nav-link active">
                             Users
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
             </div>

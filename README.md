@@ -24,6 +24,17 @@
 
 
 
+
+# Remarks
+- useEffect BUG - https://stackoverflow.com/questions/63457699/useeffect-continuously-fires-get-requests
+
+- **useEffect**
+    - https://daveceddia.com/useeffect-hook-examples/    
+    - https://reactjs.org/docs/hooks-effect.html
+
+
+
+
 --------------------------------------------------------------------------
 # Steps
 ## Router in application
