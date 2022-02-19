@@ -11,7 +11,7 @@ const Users = () => {
         (
             async () => {
                 const { data } = await axios.get('users');
-                setUsers(data);
+                setUsers(data.data);
             }
         )()
     }, [])  // to get called only once!!!!
