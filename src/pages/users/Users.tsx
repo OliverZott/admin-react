@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Wrapper from "../../components/Wrapper";
 import { User } from "../../models/user";
 
@@ -29,7 +30,6 @@ const Users = () => {
         }
     }
 
-
     const previous = () => {
         if (page > 1) {
             setPage((page - 1));
@@ -37,7 +37,14 @@ const Users = () => {
     }
 
 
+    const deleteUser = async (id: number) => {
+        if (window.confirm("Are you sure to delete this record?")) {
+            await axios.delete(`users/${id}`)
 
+            // also delete from state
+            setUsers(users.filter((user: User) => user.id !== id));
+        }
+    }
 
     const renderUsers = () => {
         return users.map((user: User) => {
@@ -47,8 +54,11 @@ const Users = () => {
                     <td>{user.first_name} {user.last_name}</td>
                     <td>{user.email}</td>
                     <td>{user.role ? user.role.name : '-'}</td>
-                    <td>{user.name}</td>
-                    <td></td>
+                    <td>
+                        <div>
+                            <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(user.id)}>Delete</a>
+                        </div>
+                    </td>
                 </tr>
             )
         })
@@ -57,6 +67,12 @@ const Users = () => {
 
     return (
         <Wrapper>
+
+            <div className="pt-3 pb-2 mb-3 border-bottom">
+                <Link to={"/users/create"} className="btn btn-sm btn-outline-secondary">Add</Link>
+            </div>
+
+
             <div className="table-responsive">
                 <table className="table table-striped table-sm">
                     <thead>
