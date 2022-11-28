@@ -2,7 +2,7 @@ import axios from "axios";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import Wrapper from "../../components/Wrapper";
-import { Role } from "../../models/role";
+import { Role } from "../../models/Role";
 
 
 export const UserCreate = () => {
@@ -25,7 +25,6 @@ export const UserCreate = () => {
     }, [])
 
 
-
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
@@ -37,6 +36,7 @@ export const UserCreate = () => {
         });
         setRedirect(true);
     };
+
 
     if (redirect) {
         return <Navigate to={'/users'} />;
@@ -82,5 +82,3 @@ export const UserCreate = () => {
         </Wrapper>
     )
 };
-
-

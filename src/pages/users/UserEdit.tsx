@@ -2,7 +2,7 @@ import axios from "axios";
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import Wrapper from "../../components/Wrapper";
-import { Role } from "../../models/role";
+import { Role } from "../../models/Role";
 
 
 export const UserEdit = (props: any) => {

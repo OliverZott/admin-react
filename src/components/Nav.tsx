@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { User } from "../models/user";
+import { User } from "../models/User";
 
 const Nav = () => {
     const [user, setUser] = useState(new User());
