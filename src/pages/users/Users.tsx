@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -56,10 +57,11 @@ const Users = () => {
                     <td>{user.role ? user.role.name : '-'}</td>
                     <td>
                         <div>
+                            <Link to={`/users/${user.id}/edit`} state={{ user }} className="btn btn-sm btn-outline-secondary">Edit</Link>
                             <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(user.id)}>Delete</a>
                         </div>
                     </td>
-                </tr>
+                </tr >
             )
         })
     }
