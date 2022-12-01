@@ -3,11 +3,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Wrapper from "../../components/Wrapper";
-import { User } from "../../models/User";
+import { Product } from "../../models/Product";
 
 
-const Users = () => {
-    const [users, setUsers] = useState<User[]>([]);
+const Products = () => {
+    const [products, setProducts] = useState<Product[]>([]);
     const [page, setPage] = useState(1);
     const [lastPage, setLastPage] = useState(0);
 
@@ -15,12 +15,12 @@ const Users = () => {
     useEffect(() => {
         (
             async () => {
-                const { data } = await axios.get(`users?page=${page}`);
-                setUsers(data.data);
+                const { data } = await axios.get(`products?page=${page}`);
+                setProducts(data.data);
                 setLastPage(data.meta.last_page)
             }
         )()
-    }, [page])  // defines what states it depends on; empty array, to get called only once!
+    }, [page])
 
 
     const next = () => {
@@ -30,35 +30,35 @@ const Users = () => {
     }
 
 
-    const previous = () => {
+    function previous() {
         if (page > 1) {
             setPage((page - 1));
         }
     }
 
 
-    const deleteUser = async (id: number) => {
+    const deleteProducts = async (id: number) => {
         if (window.confirm("Are you sure to delete this record?")) {
-            await axios.delete(`users/${id}`)
+            await axios.delete(`products/${id}`)
 
             // also delete from state
-            setUsers(users.filter((user: User) => user.id !== id));
+            setProducts(products.filter((product: Product) => product.id !== id));
         }
     }
 
 
-    const renderUsers = () => {
-        return users.map((user: User) => {
+    const renderProducts = () => {
+        return products.map((product: Product) => {
             return (
-                <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.first_name} {user.last_name}</td>
-                    <td>{user.email}</td>
-                    <td>{user.role ? user.role.name : '-'}</td>
+                <tr key={product.id}>
+                    <td>{product.id}</td>
+                    <td>{product.image}</td>
+                    <td>{product.title}</td>
+                    <td>{product.description}</td>
                     <td>
                         <div>
-                            <Link to={`/users/${user.id}/edit`} state={{ user }} className="btn btn-sm btn-outline-secondary">Edit</Link>
-                            <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(user.id)}>Delete</a>
+                            <Link to={`/products/${product.id}/edit`} state={{ product }} className="btn btn-sm btn-outline-secondary">Edit</Link>
+                            <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => deleteProducts(product.id)}>Delete</a>
                         </div>
                     </td>
                 </tr >
@@ -67,10 +67,12 @@ const Users = () => {
     }
 
 
+
+
     return (
         <Wrapper>
             <div className="pt-3 pb-2 mb-3 border-bottom">
-                <Link to={"/users/create"} className="btn btn-sm btn-outline-secondary">Add</Link>
+                <Link to={"/products/create"} className="btn btn-sm btn-outline-secondary">Add</Link>
             </div>
 
             <div className="table-responsive">
@@ -78,14 +80,13 @@ const Users = () => {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {renderUsers()}
+                        {renderProducts()}
                     </tbody>
                 </table>
             </div>
@@ -100,10 +101,8 @@ const Users = () => {
                     </li>
                 </ul>
             </nav>
-
         </Wrapper>
     )
 }
 
-
-export default Users;
+export default Products;
