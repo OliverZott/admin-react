@@ -39,7 +39,7 @@ const Products = () => {
             return (
                 <tr key={product.id}>
                     <td>{product.id}</td>
-                    <td>{product.image}</td>
+                    <td><img alt="#" src={product.image} width="50"></img> </td>
                     <td>{product.title}</td>
                     <td>{product.description}</td>
                     <td>
