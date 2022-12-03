@@ -19,7 +19,7 @@ export const UserEdit = (props: any) => {
 
     // ----------------------------------------------------------------------
     // To persist mutable objects current state
-    let id = useRef(null)
+    let id = useRef(null)   // does the same as useState, but doesn't update html
     id = location.state.user.id;
 
 
