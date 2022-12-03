@@ -1,6 +1,7 @@
 import axios from "axios";
 import { SyntheticEvent, useState } from "react";
 import { Navigate } from "react-router-dom";
+import ImageUpload from "../../components/ImageUpload";
 import Wrapper from "../../components/Wrapper"
 
 export default function ProductCreate() {
@@ -38,7 +39,7 @@ export default function ProductCreate() {
 
                 <div className="mb-3">
                     <label>Description</label>
-                    <input className="form-control" required onChange={e => setProductDescription(e.target.value)} />
+                    <textarea className="form-control" value={productDescription} onChange={e => setProductDescription(e.target.value)} />
                 </div>
 
                 <div className="mb-3">
@@ -48,7 +49,10 @@ export default function ProductCreate() {
 
                 <div className="mb-3">
                     <label>Image</label>
-                    <input className="form-control" required onChange={e => setProductImage(e.target.value)} />
+                    <div className="input-group">
+                        <input className="form-control" value={productImage} onChange={e => setProductImage(e.target.value)} />
+                        <ImageUpload uploaded={setProductImage} />
+                    </div>
                 </div>
 
                 <button className="btn btn-outline-secondary">Save</button>
