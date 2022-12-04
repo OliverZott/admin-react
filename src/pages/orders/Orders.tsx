@@ -7,11 +7,21 @@ import Paginator from "../../components/Paginator";
 import { OrderItem } from "../../models/OrderItem";
 
 
+const hide = {
+    maxHeight: 0,
+    transition: '500ms ease-in'
+}
+const show = {
+    maxHeight: '150px',
+    transition: '500ms ease-out'
+}
+
+
 export default function Orders() {
     const [orders, setOrders] = useState([])
     const [lastPage, setLastPage] = useState(1)
     const [page, setPage] = useState(0)
-
+    const [selectedOrder, setSelectedorder] = useState(0)
 
 
     useEffect(() => {
@@ -25,6 +35,9 @@ export default function Orders() {
     }, [page]);
 
 
+    function selectView(id: number) {
+        setSelectedorder(id !== selectedOrder ? id : 0)
+    }
 
 
     function renderOrders() {
@@ -39,13 +52,14 @@ export default function Orders() {
                             <td>{order.total}</td>
                             <td>
                                 <div>
-                                    <a href="#" className="btn btn-sm btn-outline-secondary">View</a>
+                                    <a href="#" className="btn btn-sm btn-outline-secondary"
+                                        onClick={() => selectView(order.id)}>View</a>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td colSpan={5}>
-                                <div>
+                                <div className="overflow-hidden" style={selectedOrder === order.id ? show : hide}>
                                     <table className="table table-sm">
                                         <thead>
                                             <tr>
@@ -77,11 +91,12 @@ export default function Orders() {
         );
     }
 
+
     return (
         <Wrapper>
 
             <div className="table-responsive">
-                <table className="table table-striped table-sm">
+                <table className="table table-sm">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
