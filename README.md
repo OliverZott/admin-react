@@ -7,9 +7,9 @@
 
 ## VS Code
 
-- (Create launch.json file)
-- start app: `npm start` (no debugger attached!!)
-- in debug view: `Launch Edge against localhost` (from launch.json)
+1. (Create launch.json file)
+1. start app: `npm start` (no debugger attached!!)
+1. in debug view: `Launch Edge against localhost` (from launch.json)
 
 --------------------------------------------------------------------------
 
