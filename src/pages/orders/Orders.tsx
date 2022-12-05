@@ -47,7 +47,7 @@ export default function Orders() {
                     <>
                         <tr key={order.id}>
                             <td>{order.id}</td>
-                            <td>{order.first_name} {order.last_name}</td>
+                            <td>{order.name}</td>
                             <td>{order.email}</td>
                             <td>{order.total}</td>
                             <td>
@@ -91,9 +91,27 @@ export default function Orders() {
         );
     }
 
+    async function handleExport() {
+        const { data } = await axios.post(`export`, {}, { responseType: 'blob' });
+
+        new Blob([data], { type: 'text/csv' });  // what for??
+
+        const url = window.URL.createObjectURL(data);
+        const link = document.createElement('a');
+
+        link.href = url;
+        link.download = 'orders.csv';
+
+        link.click();
+    }
+
 
     return (
         <Wrapper>
+
+            <div className="pt-3 pb-2 mb-3 border-bottom">
+                <a href="#" className="btn btn-sm btn-outline-secondary" onClick={handleExport}>Export</a>
+            </div>
 
             <div className="table-responsive">
                 <table className="table table-sm">

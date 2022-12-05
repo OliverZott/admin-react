@@ -44,3 +44,7 @@
 
 - `npm i axios @types/axios`
 - use `axios.post().then()`
+
+## Dashboard C3
+
+- `npm i c3 @types/c3`
