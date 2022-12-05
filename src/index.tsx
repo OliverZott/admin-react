@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
+import { Provider } from 'react-redux'
+import { reduxStore } from './redux/configureStore';
+
 
 axios.defaults.baseURL = 'http://localhost:8000/api/';
 axios.defaults.withCredentials = true;
@@ -13,10 +16,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={reduxStore}>
+      <App />
+    </Provider>
   </React.StrictMode>,
 );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

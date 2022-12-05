@@ -48,3 +48,14 @@
 ## Dashboard C3
 
 - `npm i c3 @types/c3`
+
+## Redux
+
+- `npm i react-redux @types/react-redux`
+- for simpler out-of-the-box convention-over-config ...`npm install @reduxjs/toolkit`
+- actions ...are events, that redux sends
+- reducers ...get all events and handle them (e.g. adding to state)
+
+### New project
+
+- Redux + TypeScript template ...`npx create-react-app my-app --template redux-typescript`

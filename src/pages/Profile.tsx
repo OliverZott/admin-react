@@ -1,10 +1,12 @@
 import axios from "axios";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { Dispatch, SyntheticEvent, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import Wrapper from "../components/Wrapper";
 import { User } from "../models/User";
+import { setUserAction } from "../redux/actions/setUserAction";
 
 
-export default function Profile() {
+const Profile = (props: { user: User, setUser: (user: User) => void }) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -13,26 +15,28 @@ export default function Profile() {
 
 
     useEffect(() => {
-        (
-            async () => {
-                const { data } = await axios.get(`user`)
-                setFirstName(data.first_name)
-                setLastName(data.last_name)
-                setEmail(data.email)
-                setPassword(data.Password)
-            }
-        )()
-    }, [])
+        setFirstName(props.user.first_name)
+        setLastName(props.user.last_name)
+        setEmail(props.user.email)
+    }, [props.user])
 
 
     async function submitInfo(e: SyntheticEvent) {
         e.preventDefault();
 
-        await axios.put(`user/info`, {
+        const { data } = await axios.put(`user/info`, {
             first_name: firstName,
             last_name: lastName,
             email,
-        })
+        });
+
+        props.setUser(new User(
+            data.id,
+            data.first_name,
+            data.last_name,
+            data.email,
+            data.role
+        ));
     }
 
 
@@ -88,3 +92,19 @@ export default function Profile() {
         </Wrapper>
     )
 }
+
+
+const mapStateToProps = (state: { user: User }): { user: User } => {
+    return {
+        user: state.user
+    };
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+    return {
+        setUser: (user: User) => dispatch(setUserAction(user))
+    };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
