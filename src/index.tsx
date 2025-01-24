@@ -10,6 +10,7 @@ import { reduxStore } from './redux/configureStore';
 
 axios.defaults.baseURL = 'http://localhost:8000/api/';
 axios.defaults.withCredentials = true;
+axios.defaults.timeout = 10000; // Increase timeout to 10 seconds
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

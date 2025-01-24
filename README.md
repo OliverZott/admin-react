@@ -1,4 +1,14 @@
+# Readme
+
+React exmaple using a nodejs backend with express and user authentication
+
 # Run/DEBUG
+
+## Prerequisites
+
+- Node.js
+- npm
+- `npm install`
 
 ## JetBrains IDE
 
